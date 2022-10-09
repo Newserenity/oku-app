@@ -4,10 +4,12 @@ import Logo from "../assets/Logo";
 import ProductList from "../components/cards/ProductList";
 import QuickSearch from "../components/cards/QuickSearch";
 import RecomendList from "../components/cards/RecomendList";
+import Header from "../components/navigators/Header";
 
 const Home: NextPage = () => {
   return (
     <>
+      <Header />
       <QuickSearch />
       <RecomendList />
       <ProductList />;
