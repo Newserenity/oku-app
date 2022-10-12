@@ -8,6 +8,8 @@ import {
   XMarkIcon,
 } from "@heroicons/react/24/outline";
 import Image from "next/image";
+import SearchBar from "./SearchBar";
+import EventBar from "./EventBar";
 
 const navigation = {
   categories: [
@@ -149,9 +151,7 @@ export default function Example() {
   return (
     <div className="bg-white">
       <header className="relative bg-white">
-        <p className="flex h-10 items-center justify-center bg-pink-600 px-4 text-sm font-medium text-white sm:px-6 lg:px-8">
-          친구초대 이벤트 진행중! 프로모션코드를 발급해보러갈까요? (~09/30)
-        </p>
+        <EventBar />
         <nav
           aria-label="Top"
           className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex flex-row justify-between border-b border-gray-200"
@@ -164,7 +164,7 @@ export default function Example() {
                     href="#"
                     className="text-lg font-bold text-gray-700 hover:text-gray-800"
                   >
-                    LOGO OKU PLATFORM
+                    OKU PLATFORM
                   </a>
                   <a
                     href="#"
@@ -182,6 +182,24 @@ export default function Example() {
               </div>
             </div>
           </div>
+
+          <div className="">
+            <div className="flex h-16 mr-3 items-center">
+              <div className="ml-auto flex items-center">
+                <div className=" lg:hidden">
+                  <a
+                    href="#"
+                    className="text-lg font-bold text-gray-700 hover:text-gray-800"
+                  >
+                    OKU
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <SearchBar></SearchBar>
+
           <div className="">
             <div className="flex h-16 items-center">
               <div className="ml-auto flex items-center">
@@ -198,17 +216,6 @@ export default function Example() {
                     className="text-sm font-medium text-gray-700 hover:text-gray-800"
                   >
                     회원가입
-                  </a>
-                </div>
-
-                {/* Search */}
-                <div className="flex lg:ml-6">
-                  <a href="#" className="p-2 text-gray-400 hover:text-gray-500">
-                    <span className="sr-only">Search</span>
-                    <MagnifyingGlassIcon
-                      className="h-6 w-6"
-                      aria-hidden="true"
-                    />
                   </a>
                 </div>
 
