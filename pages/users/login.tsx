@@ -4,10 +4,10 @@ function login() {
   return (
     <>
       <div className="h-screen w-full flex flex-col justify-center items-center bg-gradient-to-r from-indigo-200 via-purple-200 to-pink-200">
-        <div className="relative p-4 w-full max-w-md h-full">
-          <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
-            <div className="py-6 px-6 lg:px-8">
-              <h3 className="mb-4 text-xl font-medium text-gray-900 dark:text-white">
+        <div className="relative p-4 w-full max-w-md h-auto">
+          <div className="relative bg-white rounded-lg shadow dark:bg-gray-700 py-4">
+            <div className="py-10 px-10">
+              <h3 className="mb-8 text-2xl font-medium text-gray-900 dark:text-white">
                 로그인
               </h3>
               <form className="space-y-6" action="#">

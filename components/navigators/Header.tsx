@@ -1,13 +1,9 @@
-import { Fragment, useState } from "react";
-import { Dialog, Popover, Tab, Transition } from "@headlessui/react";
 import {
-  Bars3Icon,
   HeartIcon,
-  MagnifyingGlassIcon,
-  ShoppingBagIcon,
-  XMarkIcon,
+  UserCircleIcon,
+  UserIcon,
+  UsersIcon,
 } from "@heroicons/react/24/outline";
-import Image from "next/image";
 import SearchBar from "./SearchBar";
 import EventBar from "./EventBar";
 import Link from "next/link";
@@ -142,21 +138,12 @@ const navigation = {
   ],
 };
 
-function classNames(...classes: any) {
-  return classes.filter(Boolean).join(" ");
-}
-
 function Header() {
-  const [open, setOpen] = useState(false);
-
   return (
     <div className="bg-white">
       <header className="relative bg-white">
         <EventBar />
-        <nav
-          aria-label="Top"
-          className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex flex-row justify-between border-b border-gray-200"
-        >
+        <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex flex-row justify-between border-b border-gray-200">
           <div className="">
             <div className="flex h-16 items-center">
               <div className="ml-auto flex items-center">
@@ -201,14 +188,14 @@ function Header() {
 
           <SearchBar></SearchBar>
 
-          <div className="">
+          <div className="hidden sm:flex">
             <div className="flex h-16 items-center">
               <div className="ml-auto flex items-center">
-                <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
+                <div className="flex flex-1 items-center justify-end space-x-6">
                   <a className="text-sm font-medium text-gray-700 hover:text-gray-800">
                     <Link href="/users/login">로그인</Link>
                   </a>
-                  <span className="h-6 w-px bg-gray-200" aria-hidden="true" />
+                  <span className="h-6 w-px bg-gray-200" />
                   <a
                     href="#"
                     className="text-sm font-medium text-gray-700 hover:text-gray-800"
@@ -216,18 +203,16 @@ function Header() {
                     회원가입
                   </a>
                 </div>
-
-                {/* Like */}
-                <div className="ml-4 flow-root lg:ml-6">
-                  <a href="#" className="group -m-2 flex items-center p-2">
-                    <HeartIcon
-                      className="h-6 w-6 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
-                      aria-hidden="true"
-                    />
-                  </a>
-                </div>
               </div>
             </div>
+          </div>
+          {/* Like */}
+          <div className="flex flex-row sm:hidden">
+            <a href="#" className="group -m-2 flex items-center p-2">
+              <Link href="/users/login">
+                <UserCircleIcon className="h-6 w-6 flex-shrink-0 text-gray-400 group-hover:text-gray-500" />
+              </Link>
+            </a>
           </div>
         </nav>
       </header>
