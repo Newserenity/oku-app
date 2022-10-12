@@ -3,7 +3,7 @@ import React from "react";
 function login() {
   return (
     <>
-      <div className="h-screen w-full flex flex-col justify-center items-center bg-gradient-to-r from-indigo-200 via-purple-200 to-pink-200">
+      <div className="h-screen w-full flex flex-col justify-center items-center bg-gradient-to-r from-indigo-200 via-purple-200 to-pink-200 dark:from-indigo-900 dark:via-purple-900 dark:to-pink-900">
         <div className="relative p-4 w-full max-w-md h-auto">
           <div className="relative bg-white rounded-lg shadow dark:bg-gray-700 py-4">
             <div className="py-10 px-10">
@@ -24,7 +24,7 @@ function login() {
                     name="email"
                     id="email"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                    placeholder="name@company.com"
+                    placeholder="user@domain.com"
                   />
                 </div>
                 {/* password */}
