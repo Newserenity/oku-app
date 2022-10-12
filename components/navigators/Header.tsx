@@ -10,6 +10,7 @@ import {
 import Image from "next/image";
 import SearchBar from "./SearchBar";
 import EventBar from "./EventBar";
+import Link from "next/link";
 
 const navigation = {
   categories: [
@@ -145,7 +146,7 @@ function classNames(...classes: any) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function Example() {
+function Header() {
   const [open, setOpen] = useState(false);
 
   return (
@@ -204,11 +205,8 @@ export default function Example() {
             <div className="flex h-16 items-center">
               <div className="ml-auto flex items-center">
                 <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
-                  <a
-                    href="#"
-                    className="text-sm font-medium text-gray-700 hover:text-gray-800"
-                  >
-                    로그인
+                  <a className="text-sm font-medium text-gray-700 hover:text-gray-800">
+                    <Link href="/users/login">로그인</Link>
                   </a>
                   <span className="h-6 w-px bg-gray-200" aria-hidden="true" />
                   <a
@@ -236,3 +234,5 @@ export default function Example() {
     </div>
   );
 }
+
+export default Header;
