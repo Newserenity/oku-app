@@ -32,7 +32,7 @@ const callouts = [
 
 function QuickSearch() {
   return (
-    <div className="bg-gray-100">
+    <div className="hidden lg:block bg-gray-100">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-2xl py-10 lg:max-w-none lg:py-14">
           <h2 className="text-2xl font-bold text-gray-900">빠른 검색</h2>

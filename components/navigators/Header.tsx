@@ -192,27 +192,31 @@ function Header() {
             <div className="flex h-16 items-center">
               <div className="ml-auto flex items-center">
                 <div className="flex flex-1 items-center justify-end space-x-6">
-                  <a className="text-sm font-medium text-gray-700 hover:text-gray-800">
-                    <Link href="/users/login">로그인</Link>
-                  </a>
+                  <Link href="/users/login">
+                    <a className="text-sm font-medium text-gray-700 hover:text-gray-800">
+                      로그인
+                    </a>
+                  </Link>
                   <span className="h-6 w-px bg-gray-200" />
-                  <a
-                    href="#"
-                    className="text-sm font-medium text-gray-700 hover:text-gray-800"
-                  >
-                    회원가입
-                  </a>
+                  <Link href="/users/signin">
+                    <a
+                      href="#"
+                      className="text-sm font-medium text-gray-700 hover:text-gray-800"
+                    >
+                      회원가입
+                    </a>
+                  </Link>
                 </div>
               </div>
             </div>
           </div>
           {/* Like */}
           <div className="flex flex-row sm:hidden">
-            <a href="#" className="group -m-2 flex items-center p-2">
-              <Link href="/users/login">
+            <Link href="/users/login">
+              <a href="#" className="group -m-2 flex items-center p-2">
                 <UserCircleIcon className="h-6 w-6 flex-shrink-0 text-gray-400 group-hover:text-gray-500" />
-              </Link>
-            </a>
+              </a>
+            </Link>
           </div>
         </nav>
       </header>

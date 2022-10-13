@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 function login() {
@@ -78,12 +79,14 @@ function login() {
                 </button>
                 <div className="text-sm font-medium text-gray-500 dark:text-gray-300">
                   계정이 없으신가요?{" "}
-                  <a
-                    href="#"
-                    className="text-blue-700 hover:underline dark:text-blue-500"
-                  >
-                    회원가입
-                  </a>
+                  <Link href="/users/signin">
+                    <a
+                      href="#"
+                      className="text-blue-700 hover:underline dark:text-blue-500"
+                    >
+                      회원가입
+                    </a>
+                  </Link>
                 </div>
               </form>
             </div>
