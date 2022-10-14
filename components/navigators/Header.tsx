@@ -143,7 +143,7 @@ function Header() {
     <div className="bg-white">
       <header className="relative bg-white">
         <EventBar />
-        <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex flex-row justify-between border-b border-gray-200">
+        <nav className="mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl flex flex-row justify-between border-b border-gray-200">
           <div className="">
             <div className="flex h-16 items-center">
               <div className="ml-auto flex items-center">
@@ -171,24 +171,20 @@ function Header() {
             </div>
           </div>
 
-          <div className="">
-            <div className="flex h-16 mr-3 items-center">
-              <div className="ml-auto flex items-center">
-                <div className=" lg:hidden">
-                  <a
-                    href="#"
-                    className="text-lg font-bold text-gray-700 hover:text-gray-800"
-                  >
-                    OKU
-                  </a>
-                </div>
-              </div>
+          <div className="my-auto flex items-center">
+            <div className=" lg:hidden">
+              <a
+                href="#"
+                className="text-lg font-bold text-gray-700 hover:text-gray-800"
+              >
+                OKU
+              </a>
             </div>
           </div>
 
           <SearchBar></SearchBar>
 
-          <div className="hidden sm:flex">
+          <div className="hidden px-12 sm:flex">
             <div className="flex h-16 items-center">
               <div className="ml-auto flex items-center">
                 <div className="flex flex-1 items-center justify-end space-x-6">
