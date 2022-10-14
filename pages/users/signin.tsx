@@ -1,7 +1,7 @@
 import Link from "next/link";
 import React from "react";
 
-function signin() {
+function Signin() {
   return (
     <>
       <div className="h-screen w-full flex flex-col justify-center items-center bg-gradient-to-r from-indigo-200 via-purple-200 to-pink-200 dark:from-indigo-900 dark:via-purple-900 dark:to-pink-900">
@@ -60,7 +60,7 @@ function signin() {
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                   />
                 </div>
-                {/* password */}
+                {/* password check */}
                 <div>
                   <label
                     htmlFor="password"
@@ -116,7 +116,7 @@ function signin() {
                       href="#"
                       className="text-blue-700 hover:underline dark:text-blue-500"
                     >
-                      로그인
+                      회원가입
                     </a>
                   </Link>
                 </div>
@@ -129,4 +129,4 @@ function signin() {
   );
 }
 
-export default signin;
+export default Signin;

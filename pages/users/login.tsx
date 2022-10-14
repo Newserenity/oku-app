@@ -1,7 +1,17 @@
+import { getFontOverrideCss } from "next/dist/server/font-utils";
 import Link from "next/link";
-import React from "react";
+import { useState } from "react";
 
-function login() {
+function Login() {
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [rememberUser, setRememberUser] = useState<string>("");
+
+  const [emailEmpty, setEmailEmpty] = useState<boolean>(false);
+  const [passwordEmpty, setPasswordEmpty] = useState<boolean>(false);
+
+  function loginHandler(): void {}
+
   return (
     <>
       <div className="h-screen w-full flex flex-col justify-center items-center bg-gradient-to-r from-indigo-200 via-purple-200 to-pink-200 dark:from-indigo-900 dark:via-purple-900 dark:to-pink-900">
@@ -21,12 +31,18 @@ function login() {
                     Email
                   </label>
                   <input
-                    type="email"
-                    name="email"
-                    id="email"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                    placeholder="user@domain.com"
+                    placeholder="name@email.com"
+                    type="email"
+                    id="email"
+                    onChange={(e) => setEmail(e.target.value)}
+                    value={email}
                   />
+                  {emailEmpty ? (
+                    <p className="text-red-400 text-xs italic mt-3 ml-1">
+                      Email 필드는 필수입니다
+                    </p>
+                  ) : null}
                 </div>
                 {/* password */}
                 <div>
@@ -41,8 +57,15 @@ function login() {
                     name="password"
                     id="password"
                     placeholder="••••••••"
+                    onChange={(e) => setPassword(e.target.value)}
+                    value={password}
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                   />
+                  {passwordEmpty ? (
+                    <p className="text-red-400 text-xs italic mt-3 ml-1">
+                      Password 필드는 필수입니다
+                    </p>
+                  ) : null}
                 </div>
 
                 <div className="flex justify-between">
@@ -52,7 +75,8 @@ function login() {
                       <input
                         id="remember"
                         type="checkbox"
-                        value=""
+                        onChange={(e) => setRememberUser(e.target.value)}
+                        value={rememberUser}
                         className="w-4 h-4 bg-gray-50 rounded border border-gray-300 focus:ring-3 focus:ring-blue-300 dark:bg-gray-600 dark:border-gray-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800"
                       />
                     </div>
@@ -63,7 +87,6 @@ function login() {
                       로그인 상태 유지
                     </label>
                   </div>
-
                   <a
                     href="#"
                     className="text-sm text-blue-700 hover:underline dark:text-blue-500"
@@ -71,8 +94,10 @@ function login() {
                     로그인에 문제가 있나요?
                   </a>
                 </div>
+
                 <button
                   type="submit"
+                  onClick={loginHandler}
                   className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                 >
                   로그인
@@ -97,4 +122,4 @@ function login() {
   );
 }
 
-export default login;
+export default Login;

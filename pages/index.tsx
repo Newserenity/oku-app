@@ -15,7 +15,7 @@ const Home: NextPage = () => {
       <MainBanner />
       <QuickSearch />
       <RecomendList />
-      <ProductList />;
+      <ProductList />
     </>
   );
 };
