@@ -1,7 +1,7 @@
 import Link from "next/link";
 import React from "react";
 
-function Signin() {
+function Register() {
   return (
     <>
       <div className="h-screen w-full flex flex-col justify-center items-center bg-gradient-to-r from-indigo-200 via-purple-200 to-pink-200 dark:from-indigo-900 dark:via-purple-900 dark:to-pink-900">
@@ -129,4 +129,4 @@ function Signin() {
   );
 }
 
-export default Signin;
+export default Register;
