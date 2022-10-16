@@ -1,9 +1,4 @@
-import {
-  HeartIcon,
-  UserCircleIcon,
-  UserIcon,
-  UsersIcon,
-} from "@heroicons/react/24/outline";
+import { UserCircleIcon } from "@heroicons/react/24/outline";
 import SearchBar from "./SearchBar";
 import EventBar from "./EventBar";
 import Link from "next/link";
