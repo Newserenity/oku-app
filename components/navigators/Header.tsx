@@ -189,7 +189,7 @@ function Header() {
                     </a>
                   </Link>
                   <span className="h-6 w-px bg-gray-200" />
-                  <Link href="/users/signin">
+                  <Link href="/users/register">
                     <a
                       href="#"
                       className="text-sm font-medium text-gray-700 hover:text-gray-800"

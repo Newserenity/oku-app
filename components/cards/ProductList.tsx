@@ -95,6 +95,7 @@ function ProductList() {
         {products.map((product) => (
           <>
             <Product
+              key={product.id}
               id={product.id}
               href={product.href}
               imageSrc={product.imageSrc}
