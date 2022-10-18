@@ -1,7 +1,31 @@
 import Link from "next/link";
 import React from "react";
+import { FieldErrors, useForm } from "react-hook-form";
+
+interface IRegisterForm {
+  name: string;
+  email: string;
+  password: string;
+  passwordCheck: string;
+  agreement: boolean;
+}
 
 function Register() {
+  const {
+    register,
+    handleSubmit,
+    getValues,
+    formState: { errors },
+  } = useForm<IRegisterForm>({ mode: "onTouched" });
+
+  function onValid(data: IRegisterForm) {
+    console.log(data);
+  }
+
+  function onInvalid(errors: FieldErrors) {
+    console.log(errors);
+  }
+
   return (
     <>
       <div className="h-screen w-full flex flex-col justify-center items-center bg-gradient-to-r from-indigo-200 via-purple-200 to-pink-200 dark:from-indigo-900 dark:via-purple-900 dark:to-pink-900">
@@ -11,7 +35,10 @@ function Register() {
               <h3 className="mb-8 text-2xl font-medium text-gray-900 dark:text-white">
                 회원가입
               </h3>
-              <form className="space-y-6" action="#">
+              <form
+                className="space-y-6"
+                onSubmit={handleSubmit(onValid, onInvalid)}
+              >
                 {/* name */}
                 <div>
                   <label
@@ -21,11 +48,11 @@ function Register() {
                     닉네임
                   </label>
                   <input
-                    type="email"
-                    name="email"
-                    id="email"
+                    type="text"
+                    id="name"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                     placeholder="name"
+                    {...register("name", { required: true })}
                   />
                 </div>
                 {/* email */}
@@ -38,11 +65,25 @@ function Register() {
                   </label>
                   <input
                     type="email"
-                    name="email"
                     id="email"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                     placeholder="user@domain.com"
+                    {...register("email", {
+                      required: "email 필드는 필수입니다",
+                      validate: {
+                        // 이미 가입된 이메일인지 검증
+                        // existEmail: () => {}
+                      },
+                      pattern: {
+                        message: "이메일 형식이 올바르지 않습니다",
+                        value:
+                          /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                      },
+                    })}
                   />
+                  <p className="text-red-400 text-xs italic mt-3 ml-1">
+                    {errors.email?.message}
+                  </p>
                 </div>
                 {/* password */}
                 <div>
@@ -53,12 +94,23 @@ function Register() {
                     Password
                   </label>
                   <input
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                     type="password"
-                    name="password"
                     id="password"
                     placeholder="••••••••"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                    {...register("password", {
+                      required: "password 필드는 필수입니다",
+                      pattern: {
+                        message:
+                          "password는 8글자이상, 문자, 숫자, 특수문자를 포함해야합니다",
+                        value:
+                          /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/,
+                      },
+                    })}
                   />
+                  <p className="text-red-400 text-xs italic mt-3 ml-1">
+                    {errors.password?.message}
+                  </p>
                 </div>
                 {/* password check */}
                 <div>
@@ -69,23 +121,38 @@ function Register() {
                     Password 확인
                   </label>
                   <input
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                     type="password"
-                    name="password"
                     id="passwordCheck"
                     placeholder="••••••••"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                    //if 문은 동작하나 validation을 통과하지 못함
+                    {...register("passwordCheck", {
+                      required: "passwordCheck 필드는 필수입니다",
+                      validate: {
+                        isSameAsInput: (passwordCheck) => {
+                          return getValues().password == passwordCheck
+                            ? ""
+                            : "password가 다릅니다";
+                        },
+                      },
+                    })}
                   />
+                  <p className="text-red-400 text-xs italic mt-3 ml-1">
+                    {errors.passwordCheck?.message}
+                  </p>
                 </div>
 
                 <div className="flex justify-between">
-                  {/* 로그인 상태 유지 */}
+                  {/* 이용약관 동의 */}
                   <div className="flex items-start">
                     <div className="flex items-center h-5">
                       <input
-                        id="remember"
-                        type="checkbox"
-                        value=""
                         className="w-4 h-4 bg-gray-50 rounded border border-gray-300 focus:ring-3 focus:ring-blue-300 dark:bg-gray-600 dark:border-gray-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800"
+                        id="agreement"
+                        type="checkbox"
+                        {...register("agreement", {
+                          required: "agreement 필드는 필수입니다",
+                        })}
                       />
                     </div>
                     <label
@@ -103,6 +170,9 @@ function Register() {
                     약관상세내용
                   </a>
                 </div>
+                <p className="text-red-400 text-xs italic mt-3 ml-1">
+                  {errors.agreement?.message}
+                </p>
                 <button
                   type="submit"
                   className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"

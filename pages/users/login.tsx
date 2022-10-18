@@ -8,22 +8,15 @@ import {
   useForm,
 } from "react-hook-form";
 
-// less cdoe
-// don't deal with event
-//react hook form
-
-//유저가 입력하기 시작하면 트리거됨
-//
-
 interface ILoginForm {
   email: string;
   password: string;
+  remember: boolean;
 }
 
 function Login() {
   const {
     register,
-    watch,
     handleSubmit,
     formState: { errors },
   } = useForm<ILoginForm>({ mode: "onTouched" });
@@ -102,6 +95,7 @@ function Login() {
                       <input
                         className="w-4 h-4 bg-gray-50 rounded border border-gray-300 focus:ring-3 focus:ring-blue-300 dark:bg-gray-600 dark:border-gray-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800"
                         type="checkbox"
+                        {...register("remember")}
                       />
                     </div>
                     <label
