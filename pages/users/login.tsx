@@ -1,15 +1,40 @@
 import Link from "next/link";
 import { useState } from "react";
-import { useForm } from "react-hook-form";
+import {
+  appendErrors,
+  FieldErrors,
+  FieldValues,
+  SubmitHandler,
+  useForm,
+} from "react-hook-form";
 
 // less cdoe
 // don't deal with event
 //react hook form
 
-function Login() {
-  const { register, watch } = useForm();
+//유저가 입력하기 시작하면 트리거됨
+//
 
-  function loginHandler(): void {}
+interface ILoginForm {
+  email: string;
+  password: string;
+}
+
+function Login() {
+  const {
+    register,
+    watch,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<ILoginForm>({ mode: "onTouched" });
+
+  function onValid(data: ILoginForm) {
+    console.log(data);
+  }
+
+  function onInvalid(errors: FieldErrors) {
+    console.log(errors);
+  }
 
   return (
     <>
@@ -20,7 +45,10 @@ function Login() {
               <h3 className="mb-8 text-2xl font-medium text-gray-900 dark:text-white">
                 로그인
               </h3>
-              <form className="space-y-6" action="#">
+              <form
+                className="space-y-6"
+                onSubmit={handleSubmit(onValid, onInvalid)}
+              >
                 {/* email */}
                 <div>
                   <label
@@ -33,14 +61,24 @@ function Login() {
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                     placeholder="name@email.com"
                     type="email"
-                    {...register("email")}
+                    {...register("email", {
+                      required: "email 필드는 필수입니다",
+                      pattern: {
+                        message: "이메일 형식이 올바르지 않습니다",
+                        value:
+                          /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                      },
+                    })}
                   />
+                  <p className="text-red-400 text-xs italic mt-3 ml-1">
+                    {errors.email?.message}
+                  </p>
                 </div>
                 {/* password */}
                 <div>
                   <label
                     htmlFor="password"
-                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                    className="block mb-2 text-sm font-medium text-gray-900 }dark:text-gray-300"
                   >
                     Password
                   </label>
@@ -48,13 +86,13 @@ function Login() {
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                     placeholder="••••••••"
                     type="password"
-                    {...register("password")}
+                    {...register("password", {
+                      required: "Password 필드는 필수입니다",
+                    })}
                   />
-                  {/* {passwordEmpty ? (
-                    <p className="text-red-400 text-xs italic mt-3 ml-1">
-                      Password 필드는 필수입니다
-                    </p>
-                  ) : null} */}
+                  <p className="text-red-400 text-xs italic mt-3 ml-1">
+                    {errors.password?.message}
+                  </p>
                 </div>
 
                 <div className="flex justify-between">
@@ -64,7 +102,6 @@ function Login() {
                       <input
                         className="w-4 h-4 bg-gray-50 rounded border border-gray-300 focus:ring-3 focus:ring-blue-300 dark:bg-gray-600 dark:border-gray-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800"
                         type="checkbox"
-                        {...register("remember")}
                       />
                     </div>
                     <label
@@ -85,7 +122,6 @@ function Login() {
                 <button
                   className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                   type="submit"
-                  {...register("submit")}
                 >
                   로그인
                 </button>
