@@ -26,6 +26,10 @@ function Register() {
     console.log(errors);
   }
 
+  function inputPassword() {
+    getValues().password;
+  }
+
   return (
     <>
       <div className="h-screen w-full flex flex-col justify-center items-center bg-gradient-to-r from-indigo-200 via-purple-200 to-pink-200 dark:from-indigo-900 dark:via-purple-900 dark:to-pink-900">
@@ -126,14 +130,13 @@ function Register() {
                     id="passwordCheck"
                     placeholder="••••••••"
                     //if 문은 동작하나 validation을 통과하지 못함
+                    // getValues().password;
                     {...register("passwordCheck", {
-                      required: "passwordCheck 필드는 필수입니다",
+                      required: "passwordCheck is required",
                       validate: {
-                        isSameAsInput: (passwordCheck) => {
-                          return getValues().password == passwordCheck
-                            ? ""
-                            : "password가 다릅니다";
-                        },
+                        inputPassword: (value) =>
+                          getValues().password == value ||
+                          "password가 다릅니다",
                       },
                     })}
                   />
