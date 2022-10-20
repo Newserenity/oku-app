@@ -1,17 +1,13 @@
+import Warning from "@components/modals/Warning";
 import Link from "next/link";
 import { useState } from "react";
-import {
-  appendErrors,
-  FieldErrors,
-  FieldValues,
-  SubmitHandler,
-  useForm,
-} from "react-hook-form";
+import { FieldErrors, useForm } from "react-hook-form";
 
 interface ILoginForm {
   email: string;
   password: string;
   remember: boolean;
+  formError?: string;
 }
 
 function Login() {
@@ -19,10 +15,16 @@ function Login() {
     register,
     handleSubmit,
     formState: { errors },
+    setError,
   } = useForm<ILoginForm>({ mode: "onTouched" });
+
+  const [warning, setWarning] = useState(false);
 
   function onValid(data: ILoginForm) {
     console.log(data);
+
+    setError("formError", { message: "Backend is offline" });
+    setWarning(true);
   }
 
   function onInvalid(errors: FieldErrors) {
@@ -31,10 +33,18 @@ function Login() {
 
   return (
     <>
+      <Warning
+        state={warning}
+        title={errors.formError?.message}
+        message={errors.formError?.message}
+      />
       <div className="h-screen w-full flex flex-col justify-center items-center bg-gradient-to-r from-indigo-200 via-purple-200 to-pink-200 dark:from-indigo-900 dark:via-purple-900 dark:to-pink-900">
         <div className="relative p-4 w-full max-w-md h-auto">
           <div className="relative bg-white rounded-lg shadow dark:bg-gray-700 py-4">
             <div className="py-10 px-10">
+              <p className="text-red-400 text-xs italic mt-3 ml-1">
+                {errors.formError?.message}
+              </p>
               <h3 className="mb-8 text-2xl font-medium text-gray-900 dark:text-white">
                 로그인
               </h3>
