@@ -1,7 +1,17 @@
+import { searchQuery } from "@components/atom";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
+import { useForm } from "react-hook-form";
+import { useRecoilState } from "recoil";
+
+interface ISearchForm {
+  keyword: string;
+}
 
 function SearchBar() {
+  // const [keyword, setKeyword] = useRecoilState<ISearchForm>(searchQuery);
+  const [keyword, setKeyword] = useState("");
+
   return (
     <>
       <form className="flex flex-row">
@@ -24,13 +34,15 @@ function SearchBar() {
             </svg>
           </div>
           <input
-            type="search"
-            id="default-search"
+            type="keyword"
+            id="keyword"
             className="p-3 pl-10 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             placeholder="상품 검색"
+            onChange={(e) => setKeyword(e.target.value)}
+            value={keyword}
           />
         </div>
-        <Link href="/search?">
+        <Link href={`/search/${keyword}`}>
           <button
             type="submit"
             className="mx-4 my-3 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"

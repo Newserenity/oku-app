@@ -1,8 +1,11 @@
 import { atom } from "recoil";
+import { v1 } from "uuid";
 
-const serverErrorModalstate = atom({
-  key: "warningModalstate",
+export const serverErrorModalstate = atom({
+  key: `serverErrorModalstate/${v1()}`,
   default: false,
 });
 
-export { serverErrorModalstate };
+export const searchQuery = atom({
+  key: `searchQuery/${v1()}`,
+});
