@@ -143,24 +143,24 @@ function Header() {
             <div className="flex h-16 items-center">
               <div className="ml-auto flex items-center">
                 <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-10">
-                  <a
-                    href="#"
-                    className="text-lg font-bold text-gray-700 hover:text-gray-800"
-                  >
-                    OKU PLATFORM
-                  </a>
-                  <a
-                    href="#"
-                    className="text-sm font-medium text-gray-700 hover:text-gray-800"
-                  >
-                    매거진
-                  </a>
-                  <a
-                    href="#"
-                    className="text-sm font-medium text-gray-700 hover:text-gray-800"
-                  >
-                    고객센터
-                  </a>
+                  <Link href="/">
+                    <a className="text-lg font-bold text-gray-700 hover:text-gray-800">
+                      OKU PLATFORM
+                    </a>
+                  </Link>
+                  <Link href="/magazin">
+                    <a
+                      href="#"
+                      className="text-sm font-medium text-gray-700 hover:text-gray-800"
+                    >
+                      매거진
+                    </a>
+                  </Link>
+                  <Link href="/support">
+                    <a className="text-sm font-medium text-gray-700 hover:text-gray-800">
+                      고객센터
+                    </a>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -168,12 +168,11 @@ function Header() {
 
           <div className="my-auto flex items-center">
             <div className=" lg:hidden">
-              <a
-                href="#"
-                className="text-lg font-bold text-gray-700 hover:text-gray-800"
-              >
-                OKU
-              </a>
+              <Link href="/">
+                <a className="text-lg font-bold text-gray-700 hover:text-gray-800">
+                  OKU
+                </a>
+              </Link>
             </div>
           </div>
 
