@@ -2,25 +2,15 @@ import React from "react";
 import { Fragment, useRef, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
+import { useRecoilState } from "recoil";
+import { serverErrorModalstate } from "@components/atom";
 
-interface IWarning {
-  state: boolean;
-  title?: string;
-  message?: string;
-}
-
-function Warning(props: IWarning) {
-  const [open, setOpen] = useState(true);
-  const cancelButtonRef = useRef(null);
+function ServerError() {
+  const [open, setOpen] = useRecoilState(serverErrorModalstate);
 
   return (
     <Transition.Root show={open} as={Fragment}>
-      <Dialog
-        as="div"
-        className="relative z-10"
-        initialFocus={cancelButtonRef}
-        onClose={setOpen}
-      >
+      <Dialog as="div" className="relative z-10" onClose={setOpen}>
         <Transition.Child
           as={Fragment}
           enter="ease-out duration-300"
@@ -58,10 +48,16 @@ function Warning(props: IWarning) {
                         as="h3"
                         className="text-lg font-medium leading-6 text-gray-900"
                       >
-                        {props.title}
+                        OKU 서버에 연결할 수 없습니다.
                       </Dialog.Title>
                       <div className="mt-2">
-                        <p className="text-sm text-gray-500">{props.message}</p>
+                        <p className="text-sm text-gray-500">
+                          예기치 못한 서버 에러가 발생했습니다. 이 에러가
+                          반복된다면 관리자에게 문의하세요.
+                        </p>
+                        <p className="text-sm text-yellow-500 mt-3">
+                          &#40;500 ERROR&#41; Hint - Backend is Offline
+                        </p>
                       </div>
                     </div>
                   </div>
@@ -71,7 +67,6 @@ function Warning(props: IWarning) {
                     type="button"
                     className="mt-3 inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-base font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
                     onClick={() => setOpen(false)}
-                    ref={cancelButtonRef}
                   >
                     OK
                   </button>
@@ -85,4 +80,4 @@ function Warning(props: IWarning) {
   );
 }
 
-export default Warning;
+export default ServerError;

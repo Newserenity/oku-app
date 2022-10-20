@@ -56,8 +56,13 @@ function Register() {
                     id="name"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                     placeholder="name"
-                    {...register("name", { required: true })}
+                    {...register("name", {
+                      required: "닉네임 필드는 필수입니다",
+                    })}
                   />
+                  <p className="text-red-400 text-xs italic mt-3 ml-1">
+                    {errors.name?.message}
+                  </p>
                 </div>
                 {/* email */}
                 <div>
