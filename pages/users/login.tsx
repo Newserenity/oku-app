@@ -13,16 +13,16 @@ interface ILoginForm {
   remember: boolean;
   serverError?: string;
 }
+const date = new Date();
 
 function Login() {
+  const [warning, setWarning] = useRecoilState(serverErrorModalstate);
   const {
     register,
     handleSubmit,
     formState: { errors },
     setError,
   } = useForm<ILoginForm>({ mode: "onTouched" });
-
-  const [warning, setWarning] = useRecoilState(serverErrorModalstate);
 
   function onValid(data: ILoginForm) {
     console.log(data);
@@ -38,8 +38,6 @@ function Login() {
       setWarning(true);
     }
   }
-
-  const date = new Date();
 
   return (
     <>

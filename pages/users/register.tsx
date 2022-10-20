@@ -1,6 +1,9 @@
+import { serverErrorModalstate } from "@components/atom";
+import ServerError from "@components/modals/ServerError";
 import Link from "next/link";
 import React from "react";
 import { FieldErrors, useForm } from "react-hook-form";
+import { useRecoilState } from "recoil";
 
 interface IRegisterForm {
   name: string;
@@ -8,34 +11,53 @@ interface IRegisterForm {
   password: string;
   passwordCheck: string;
   agreement: boolean;
+  serverError: boolean;
 }
 
+const date = new Date();
+
 function Register() {
+  const [warning, setWarning] = useRecoilState(serverErrorModalstate);
   const {
     register,
     handleSubmit,
     getValues,
     formState: { errors },
+    setError,
   } = useForm<IRegisterForm>({ mode: "onTouched" });
 
   function onValid(data: IRegisterForm) {
     console.log(data);
+
+    setError("serverError", { message: "Backend is offline" });
+    setWarning(true);
   }
 
   function onInvalid(errors: FieldErrors) {
     console.log(errors);
-  }
 
-  function inputPassword() {
-    getValues().password;
+    if (errors.serverError) {
+      setWarning(true);
+    }
   }
 
   return (
     <>
+      <ServerError />
       <div className="h-screen w-full flex flex-col justify-center items-center bg-gradient-to-r from-indigo-200 via-purple-200 to-pink-200 dark:from-indigo-900 dark:via-purple-900 dark:to-pink-900">
         <div className="relative p-4 w-full max-w-md h-auto">
           <div className="relative bg-white rounded-lg shadow dark:bg-gray-700 py-4">
             <div className="py-10 px-10">
+              <p className="text-red-400 text-xs italic">
+                {errors.serverError?.message}
+              </p>
+              {errors.serverError ? (
+                <p className="text-red-400 text-xs italic mb-5">
+                  TimeStamp : {date.toUTCString()}
+                </p>
+              ) : (
+                ""
+              )}
               <h3 className="mb-8 text-2xl font-medium text-gray-900 dark:text-white">
                 회원가입
               </h3>

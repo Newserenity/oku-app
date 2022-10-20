@@ -11,6 +11,10 @@ interface ISearchForm {
 function SearchBar() {
   // const [keyword, setKeyword] = useRecoilState<ISearchForm>(searchQuery);
   const [keyword, setKeyword] = useState("");
+  // const [validation, setValidation] = useState("");
+  // if (!keyword) {
+  //   setValidation(" ");
+  // }
 
   return (
     <>
